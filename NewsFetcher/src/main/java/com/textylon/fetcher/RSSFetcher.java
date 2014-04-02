@@ -4,8 +4,11 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
+import com.sun.syndication.feed.atom.Feed;
+import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndFeed;
 import com.sun.syndication.fetcher.FeedFetcher;
 import com.sun.syndication.fetcher.FetcherException;
@@ -84,7 +87,11 @@ public class RSSFetcher {
 		for(int i = 0; i< 10; i++){
 			SyndFeed feed = feedFetcher.retrieveFeed(new URL("http://rss.nytimes.com/services/xml/rss/nyt/MiddleEast.xml"));
 			//System.out.println(feed);
-			
+			List  entries = feed.getEntries();
+			//System.out.println(entries);
+			for(int j = 0; j< entries.size(); j++){
+				System.out.println( ((SyndEntry)entries.get(j)).getUpdatedDate());
+			}
 			System.out.println("------------------------------------------");
 			System.out.println(feed.getEntries().size());
 			Thread.sleep(10000);
